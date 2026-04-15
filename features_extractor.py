@@ -4,6 +4,7 @@ import SimpleITK as sitk
 from radiomics import featureextractor, setVerbosity
 import logging
 import numpy as np
+import os
 
 setVerbosity(logging.ERROR)
 
@@ -12,6 +13,7 @@ def extract_radiomics(image_dir, mask_dir, output_csv):
     rows = []
 
     for img_path in sorted(Path(image_dir).glob("*.tiff")):
+        print(f"Processing {img_path.name}...")
         mask_path = Path(mask_dir) / f"{img_path.stem}.tiff"
         if not mask_path.exists():
             print(f"[SKIP] Masque manquant pour {img_path.name}")
@@ -75,8 +77,11 @@ def extract_radiomics(image_dir, mask_dir, output_csv):
     df.to_csv(output_csv, index=False)
     return df
 
-df = extract_radiomics(
-    image_dir  = "./image",
-    mask_dir   = "./mask",
-    output_csv = "./features.csv"
-)
+marker_list = ["BCL2", "BCL6", "CD10", "HE", "MUM1", "MYC"]
+
+for marker in marker_list :
+    df = extract_radiomics(
+        image_dir  = os.path.join("./img_dir", marker),
+        mask_dir   = os.path.join("./mask_dir", marker),
+        output_csv = f"{marker}_features.csv"
+    )
