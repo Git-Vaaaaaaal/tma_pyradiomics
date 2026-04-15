@@ -1,0 +1,15 @@
+featureClass:
+  firstorder: []
+  glcm: []
+  gldm: []
+  glrlm: []
+  glszm: []
+  ngtdm: []
+  shape2D: []
+imageType:
+  Original: {}
+setting:
+  binWidth: 25
+  force2D: true
+  force2Ddimension: 0
+  label: 1
