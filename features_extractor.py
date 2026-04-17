@@ -77,7 +77,7 @@ def extract_radiomics(image_dir, mask_dir, output_csv):
     df.to_csv(output_csv, index=False)
     return df
 
-marker_list = ["BCL2", "BCL6", "CD10", "HE", "MUM1", "MYC"]
+marker_list = ["BCL2"] #, "BCL6", "CD10", "HE", "MUM1", "MYC"
 
 for marker in marker_list :
     df = extract_radiomics(
